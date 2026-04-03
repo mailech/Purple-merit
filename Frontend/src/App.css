@@ -1,0 +1,6 @@
+/* Reset or custom styles if needed beyond index.css */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
