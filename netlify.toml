@@ -1,7 +1,15 @@
 [build]
   base = "Frontend"
   command = "npm run build"
-  publish = "Frontend/dist"
+  publish = "dist"
+
+[functions]
+  directory = "../Backend/functions"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/vibe-api/:splat"
+  status = 200
 
 [[redirects]]
   from = "/*"

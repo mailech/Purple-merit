@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -12,7 +12,7 @@ import { themes } from '../themes/presets';
 import type { ThemePreset } from '../themes/presets';
 
 const EditorPage = () => {
-  const { id } = useParams();
+  const { id: _id } = useParams();
   const navigate = useNavigate();
 
   // State Management
@@ -26,10 +26,10 @@ const EditorPage = () => {
   ]);
   const [previewMode, setPreviewMode] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
   const [isSaved, setIsSaved] = useState(true);
-  const [slug, setSlug] = useState('my-vibe-studio');
+  const [slug] = useState('my-vibe-studio');
   const [showPublishModal, setShowPublishModal] = useState(false);
   const [showCodeModal, setShowCodeModal] = useState(false);
-  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+
 
   useEffect(() => {
     if (!isSaved) {
@@ -275,7 +275,7 @@ const EditorPage = () => {
   };
 
   // 4. DEFAULT (NEO-BRUTAL, GLASS, MODERN) RENDERER
-  const renderDefaultSection = (section: any, idx: number) => {
+  const renderDefaultSection = (section: any, _idx: number) => {
     const glassStyle = activeTheme.glass ? { backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', background: activeTheme.surface, border: `1px solid rgba(255,255,255,0.2)` } : {};
     
     return (
@@ -354,11 +354,11 @@ const EditorPage = () => {
   };
 
   // Master Render switch mapping
-  const renderMasterSection = (section: any, idx: number) => {
+  const renderMasterSection = (section: any, _idx: number) => {
     if (activeTheme.id === 'terminal-pro') return renderTerminalSection(section);
     if (activeTheme.id === 'anime-cyber') return renderAnimeSection(section);
     if (activeTheme.id === 'cinema-noir') return renderCinemaSection(section);
-    return renderDefaultSection(section, idx);
+    return renderDefaultSection(section, _idx);
   };
 
   return (

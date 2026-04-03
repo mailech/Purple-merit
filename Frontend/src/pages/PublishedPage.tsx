@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Share2, Heart, ArrowRight, ExternalLink, Globe } from 'lucide-react';
+import { Share2, Heart, ArrowRight, Globe } from 'lucide-react';
 import { themes } from '../themes/presets';
 import type { ThemePreset } from '../themes/presets';
 
 const PublishedPage = () => {
-  const { slug } = useParams();
+  const { slug: _slug } = useParams();
   
   // Mock Data
   const [pageData, setPageData] = useState<any>(null);
-  const [activeTheme, setActiveTheme] = useState<ThemePreset>(themes[4]); // E.g., Anime Cyber or Terminal
-  const [wallpaper, setWallpaper] = useState<string>('');
+  const [activeTheme] = useState<ThemePreset>(themes[4]); // E.g., Anime Cyber or Terminal
+  const [wallpaper] = useState<string>('');
   const [viewCount, setViewCount] = useState(0);
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
@@ -38,7 +38,7 @@ const PublishedPage = () => {
       });
       setViewCount(1284); 
     }, 800);
-  }, [slug]);
+  }, [_slug]);
 
   if (!pageData) return (
     <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -237,7 +237,7 @@ const PublishedPage = () => {
   };
 
   // 4. DEFAULT (NEO-BRUTAL, GLASS, MODERN) RENDERER
-  const renderDefaultSection = (section: any, idx: number) => {
+  const renderDefaultSection = (section: any, _idx: number) => {
     const glassStyle = activeTheme.glass ? { backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', background: activeTheme.surface, border: `1px solid rgba(255,255,255,0.2)` } : {};
     
     return (
@@ -379,11 +379,11 @@ const PublishedPage = () => {
   };
 
   // Master Render switch mapping
-  const renderMasterSection = (section: any, idx: number) => {
+  const renderMasterSection = (section: any, _idx: number) => {
     if (activeTheme.id === 'terminal-pro') return renderTerminalSection(section);
     if (activeTheme.id === 'anime-cyber') return renderAnimeSection(section);
     if (activeTheme.id === 'cinema-noir') return renderCinemaSection(section);
-    return renderDefaultSection(section, idx);
+    return renderDefaultSection(section, _idx);
   };
 
   return (
